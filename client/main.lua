@@ -15,29 +15,6 @@ CreateThread(function()
     end
 end)
 
-local cams = {
-    {
-        type = "customization",
-        x = -561.8157,
-        y = -3780.966,
-        z = 239.0805,
-        rx = -4.2146,
-        ry = -0.0007,
-        rz = -87.8802,
-        fov = 30.0
-    },
-    {
-        type = "selection",
-        x = -562.8157,
-        y = -3776.266,
-        z = 239.0805,
-        rx = -4.2146,
-        ry = -0.0007,
-        rz = -87.8802,
-        fov = 30.0
-    }
-}
-
 local function baseModel(sex)
     if (sex == 'mp_male') then
         ApplyShopItemToPed(charPed, 0x158cb7f2, true, true, true); --head
@@ -66,12 +43,14 @@ local function skyCam(bool)
         SetTimecycleModifier('hud_def_blur')
         SetTimecycleModifierStrength(1.0)
         cam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
-        SetCamCoord(cam, -555.925, -3778.709, 238.597)
+        -- old SetCamCoord(cam, -555.925, -3778.709, 238.597)
+        SetCamCoord(cam, -556.025, -3777.209, 238.597) -- camara fija inicio sin menu
         SetCamRot(cam, -20.0, 0.0, 83)
         SetCamActive(cam, true)
         RenderScriptCams(true, false, 1, true, true)
         fixedCam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
-        SetCamCoord(fixedCam, -561.206, -3776.224, 239.597)
+        -- old SetCamCoord(fixedCam, -561.206, -3776.224, 239.597)
+        SetCamCoord(fixedCam, -559.806, -3776.624, 239.220) -- camara fija con rotacion vista con menu
         SetCamRot(fixedCam, -20.0, 0, 270.0)
         SetCamActive(fixedCam, true)
         SetCamActiveWithInterp(fixedCam, cam, 3900, true, true)
@@ -123,7 +102,7 @@ RegisterNetEvent('rsg-multicharacter:client:chooseChar', function()
     Wait(1000)
     GetInteriorAtCoords(-558.9098, -3775.616, 238.59, 137.98)
     FreezeEntityPosition(PlayerPedId(), true)
-    SetEntityCoords(PlayerPedId(), -562.91,-3776.25,237.63)
+    SetEntityCoords(PlayerPedId(), -562.91, -3776.25, 237.63)
     Wait(1500)
     ShutdownLoadingScreen()
     ShutdownLoadingScreenNui()
@@ -154,7 +133,7 @@ RegisterNUICallback('cDataPed', function(data) -- Visually seeing the char
                     while not HasModelLoaded(sex) do
                         Wait(0)
                     end
-                    charPed = CreatePed(sex, -558.91, -3776.25, 237.63, 90.0, false, false)
+                    charPed = CreatePed(sex, -558.91, -3776.25, 237.63, 120.0, false, false)
                     FreezeEntityPosition(charPed, false)
                     SetEntityInvincible(charPed, true)
                     SetBlockingOfNonTemporaryEvents(charPed, true)
@@ -162,6 +141,8 @@ RegisterNUICallback('cDataPed', function(data) -- Visually seeing the char
                         Wait(1)
                     end
                     exports['rsg-appearance']:ApplySkinMultiChar(skinTable, charPed, clothesTable)
+                    TaskStartScenarioInPlace(charPed, GetHashKey("WORLD_HUMAN_WRITE_NOTEBOOK"), -1, true, "StartScenario", 0, false)
+
                 end)
             else
                 CreateThread(function()
@@ -177,10 +158,12 @@ RegisterNUICallback('cDataPed', function(data) -- Visually seeing the char
                     end
                     Wait(100)
                     baseModel(randomModel)
-                    charPed = CreatePed(model, -558.91, -3776.25, 237.63, 90.0, false, false)
+                    charPed = CreatePed(model, -558.91, -3776.25, 237.63, 120.0, false, false)
                     FreezeEntityPosition(charPed, false)
                     SetEntityInvincible(charPed, true)
                     SetBlockingOfNonTemporaryEvents(charPed, true)
+                    TaskStartScenarioInPlace(charPed, GetHashKey("WORLD_HUMAN_WRITE_NOTEBOOK"), -1, true, "StartScenario", 0, false)
+
                 end)
             end
         end, cData.citizenid)
@@ -196,13 +179,15 @@ RegisterNUICallback('cDataPed', function(data) -- Visually seeing the char
             while not HasModelLoaded(model) do
                 Wait(0)
             end
-            charPed = CreatePed(model, -558.91, -3776.25, 237.63, 90.0, false, false)
+            charPed = CreatePed(model, -558.91, -3776.25, 237.63, 120.0, false, false)
             Wait(100)
             baseModel(randomModel)
             FreezeEntityPosition(charPed, false)
             SetEntityInvincible(charPed, true)
             NetworkSetEntityInvisibleToNetwork(charPed, true)
             SetBlockingOfNonTemporaryEvents(charPed, true)
+            TaskStartScenarioInPlace(charPed, GetHashKey("WORLD_HUMAN_WRITE_NOTEBOOK"), -1, true, "StartScenario", 0, false)
+
         end)
     end
 end)
