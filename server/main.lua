@@ -122,7 +122,7 @@ RSGCore.Functions.CreateCallback('rsg-multicharacter:server:getAppearance', func
     end)
 end)
 
-RSGCore.Commands.Add('logout', 'Cerrar sesion del personaje (Admin Only)', {}, false, function(source)
+RSGCore.Commands.Add('logout', 'Fermer la session du personnage (Admin uniquement)', {}, false, function(source)
     RSGCore.Player.Logout(source)
     TriggerClientEvent('rsg-multicharacter:client:chooseChar', source)
 end, 'admin')
