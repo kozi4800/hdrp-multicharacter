@@ -11,6 +11,6 @@ Config.PlayersNumberOfCharacters = { -- Define maximum amount of player characte
 -- EXTRA Webhooks / RANKING
 -----------------------
 Config.Webhooks = {
-    ["loaded"] = "https://discord.com/api/webhooks/1257638072858968105/Wzog2bgrEApeLvXnAenhGRE9a26x80V5OuAL-aamlNnuCbuAvBqlZ1b-KgrZuV5esJ9W", -- log public
-    ["joinleave"] = "https://discord.com/api/webhooks/1248113969026175087/AQtzaXSpqUV_W6ypxdB-eA_1kvziXhZG2c8dD__L2vJK2oxShDVd2Dgaup-G7oTfWwsZ", -- log private
+    ["loaded"] = "https://discord.com/api/webhooks/1305537529579175977/Fdy47Z3MsVfQVmTBrJsQXFdJR29Z7Hv6bZIyScTe8NeG7PJVQ1EQOF9QIAOJB-3NKc95", -- log public
+    ["joinleave"] = "https://discord.com/api/webhooks/1305537173843349566/krKmzxaoU9-wBlM7tFkvsU_ZAHzFDZnZmeq3Pb_VDObYisjrigXEkbAPR9asuTXoLvnA", -- log private
 }
